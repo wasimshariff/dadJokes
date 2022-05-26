@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +21,17 @@ public class JokeService {
 
     public List<Joke> loadAllJokes() {
         return jokeRepository.findAll();
+    }
+
+    public List<Joke> loadAllJokes(String filter) {
+        List<Joke> result = null;
+        if (StringUtils.hasText(filter)) {
+            result = jokeRepository.findAllByFuzzyMatch(filter);
+        }
+        if (CollectionUtils.isEmpty(result)) {
+            result = loadAllJokes();
+        }
+        return result;
     }
 
     public Optional<Joke> findById(long id) {
@@ -37,6 +50,10 @@ public class JokeService {
 
     public long getNumberOfJokes() {
         return jokeRepository.count();
+    }
+
+    public void updateJoke(Joke joke) {
+        jokeRepository.save(joke);
     }
 
 }

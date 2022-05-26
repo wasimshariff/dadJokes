@@ -3,3 +3,25 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-header-cell-padding {
+  padding-right: 30px;
+  text-align: center;
+}
+
+th.mat-header-cell {
+  text-align: center !important;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.active {
+  background-color: aqua;
+}
+

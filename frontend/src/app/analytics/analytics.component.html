@@ -1,0 +1,92 @@
+<div id="content">
+  <mat-form-field>
+    <mat-select placeholder="Select Top N" [(value)]="topNValue" (selectionChange)="refreshWithTopN()">
+      <mat-option *ngFor="let topN of topNValuesArray" [value]="topN">
+        {{ topN }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="card mt-5">
+    <div class="card-header">Top 10 Jokes ( By Most Likes )</div>
+    <div class="card-body">
+      <div class="form-group row">
+        <div class="col-12">
+        </div>
+      </div>
+      <div class="col-12 text-center">
+        <table mat-table [dataSource]="mostLikedJokes" matSort class="mat-elevation-z8">
+
+          <ng-container matColumnDef="text">
+            <th mat-header-cell class="mat-header-cell-padding" *matHeaderCellDef> Text</th>
+            <td mat-cell *matCellDef="let element"> {{element.text}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="upVotes">
+            <th mat-header-cell class="mat-header-cell-padding" *matHeaderCellDef> Up Votes</th>
+            <td mat-cell *matCellDef="let element"> {{element.upVotes}} </td>
+          </ng-container>
+
+          <tr mat-header-row class="mat-header-cell-padding" *matHeaderRowDef="likedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: likedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-5">
+    <div class="card-header">Top 10 Jokes ( By Most DisLikes )</div>
+    <div class="card-body">
+      <div class="form-group row">
+        <div class="col-12">
+        </div>
+      </div>
+      <div class="col-12 text-center">
+        <table mat-table [dataSource]="mostDisLikedJokes" matSort class="mat-elevation-z8">
+
+          <ng-container matColumnDef="text">
+            <th mat-header-cell class="mat-header-cell-padding" *matHeaderCellDef> Text</th>
+            <td mat-cell *matCellDef="let element"> {{element.text}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="downVotes">
+            <th mat-header-cell class="mat-header-cell-padding" *matHeaderCellDef> Down Votes</th>
+            <td mat-cell *matCellDef="let element"> {{element.downVotes}} </td>
+          </ng-container>
+
+          <tr mat-header-row class="mat-header-cell-padding" *matHeaderRowDef="disLikedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: disLikedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-5">
+    <div class="card-header">Top 10 Jokes ( Most Interated (Likes + DisLikes) )</div>
+    <div class="card-body">
+      <div class="form-group row">
+        <div class="col-12">
+        </div>
+      </div>
+      <div class="col-12 text-center">
+        <table mat-table [dataSource]="mostInteractedJokes" matSort class="mat-elevation-z8">
+
+          <ng-container matColumnDef="text">
+            <th mat-header-cell class="mat-header-cell-padding" *matHeaderCellDef> Text</th>
+            <td mat-cell *matCellDef="let element"> {{element.text}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="interactionCount">
+            <th mat-header-cell class="mat-header-cell-padding" *matHeaderCellDef> Total Votes</th>
+            <td mat-cell *matCellDef="let element"> {{element.interactionCount}} ({{element.upVotes}}
+              + {{element.downVotes}})
+            </td>
+          </ng-container>
+
+          <tr mat-header-row class="mat-header-cell-padding" *matHeaderRowDef="mostInteractedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: mostInteractedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

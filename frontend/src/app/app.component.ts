@@ -1,7 +1,4 @@
-import { Component } from '@angular/core';
-import {JokeService} from './service/joke.service';
-import {Joke} from './model/app.model';
-import {ToastrService} from 'ngx-toastr';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +6,4 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
-  randomJoke: Joke | undefined;
-  constructor(private jokeService: JokeService, private toastrService: ToastrService) {
-  }
-  getRandomJoke() {
-      this.jokeService.getRandomJoke().subscribe(result => this.randomJoke = result,
-                                                 error => this.toastrService.error(JSON.stringify(error)));
-  }
-}
+ }

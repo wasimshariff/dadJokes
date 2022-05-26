@@ -1,0 +1,42 @@
+<div id="content">
+  <div class="card mt-5">
+    <div class="card-header">Joke Detail</div>
+
+    <div class="card-body">
+      <div *ngIf="jokeDetail">
+        <div class="row">
+          <div class="col-2 form-label">Subject:</div>
+          <div class="col-6 form-label">{{jokeDetail.subject}}</div>
+        </div>
+        <div class="row">
+          <div class="col-2 form-label">Text:</div>
+          <div class="col-6 form-label">{{jokeDetail.text}}</div>
+        </div>
+        <div class="row">
+          <div class="col-2 form-label">Likes:</div>
+          <div class="col-6 form-label">{{jokeDetail.upVotes}}</div>
+        </div>
+        <div class="row">
+          <div class="col-2 form-label">Dislikes:</div>
+          <div class="col-6 form-label">{{jokeDetail.downVotes}}</div>
+        </div>
+
+        <div class="row">
+          <div class="col-2 form-label">
+            <button mat-raised-button color="accent" (click)="likeJoke()">Like!!</button>
+          </div>
+          <div class="col-2 form-label">
+            <button mat-raised-button color="warn" (click)="disLikeJoke()">Dislike</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-2 form-label">
+      <button mat-raised-button color="primary" (click)="saveJokeDetail()">Save Votes</button>
+    </div>
+  </div>
+</div>
+

@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -25,8 +28,8 @@ public class JokeController {
     private JokeService jokeService;
 
     @GetMapping()
-    public ResponseEntity<List<Joke>> listAllJokes() {
-        List<Joke> jokes = jokeService.loadAllJokes();
+    public ResponseEntity<List<Joke>> listAllJokes(@RequestParam("filter") String filter) {
+        List<Joke> jokes = jokeService.loadAllJokes(filter);
         if (jokes.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
@@ -66,7 +69,6 @@ public class JokeController {
 
     @GetMapping("/active/{count}")
     public ResponseEntity<List<Joke>> findTopNMostInteractedJokes(@PathVariable(name = "count") Integer count) {
-        System.out.println(count);
         List<Joke> jokesList = jokeService.loadAllJokes();
         jokesList.sort((o1, o2) -> o1.getInteractionCount() > o2.getInteractionCount() ? -1 : 1);
         if (jokesList.isEmpty()) {
@@ -83,5 +85,12 @@ public class JokeController {
         long randomId = new Random().nextInt(count.intValue() - 1) + 1;
         logger.info("Getting RandomJoke for Id: {}", randomId);
         return getJokeById(randomId);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity updateJoke(@PathVariable(name = "id") long id, @RequestBody Joke joke) {
+        logger.info("Updating for Joke Id : {}", joke.getId());
+        jokeService.updateJoke(joke);
+        return ResponseEntity.noContent().build();
     }
 }
