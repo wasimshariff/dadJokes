@@ -1,5 +1,13 @@
 # Dad Jokes App
 
+## Tech Stack:
+
+* Angular 12+ 
+* Spring Boot 2.7
+* H2 Embedded DB
+* Java 8
+
+
 ## Front End: 
 
 For ease of development, Front End will be running as a separate app on Lite Server.
